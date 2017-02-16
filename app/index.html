@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Electron boilerplate</title>
+		<link rel="stylesheet" href="index.css">
+		<script src="helpers/read.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<h1>Electron boilerplate</h1>
+			</header>
+			<section class="main"></section>
+			<form>
+			<textarea id="toRead" placeholder="Enter text to be read here"></textarea>
+			<button id="readSubmit" type="submit">"Submit"</button>
+			<button type="reset">"Clear"</button>
+			</form>
+			<footer></footer>
+		</div>
+		<script>
+		require('electron').remote.getCurrentWindow().toggleDevTools({detached: true});
+		document.addEventListener("DOMContentLoaded", function (event) {
+		  const reader = require('./helpers/read');
+
+		  const submitButton = document.querySelector("#readSubmit");
+		  submitButton.addEventListener("click", (ev) => {
+		    ev.preventDefault();
+		    ev.stopPropagation();
+		    const toRead = document.getElementById("toRead").value;
+		    console.log('text : ', toRead);
+		    reader.readText(toRead);
+		  })
+		});
+		</script>
+
+		<script>
+	document.addEventListener("keydown", function (e) {
+		if (e.which === 123) {
+			require('remote').getCurrentWindow().toggleDevTools();
+		} else if (e.which === 116) {
+			location.reload();
+		}
+	});
+</script>
+	</body>
+</html>
