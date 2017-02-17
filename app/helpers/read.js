@@ -9,6 +9,11 @@ function readText(text, voice) {
   return say.speak(text, toUse);
 };
 
+function stop() {
+  return say.stop();
+}
+
 module.exports = {
   readText,
+  stop,
 }

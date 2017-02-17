@@ -44,6 +44,7 @@
 			            </select>
 			      	</p>
 			          <button type="submit" id="submit" value="Send" class="wpcf7-form-control wpcf7-submit btn">Read</button>
+			          <button id="stop" class="wpcf7-form-control wpcf7-submit btn">Stop Reading</button>
 				  </form>
 				</div>
 			<footer>
@@ -57,6 +58,8 @@
 		  const reader = require('./helpers/read');
 
 		  const submitButton = document.querySelector("#submit");
+		  const stopButton = document.querySelector("#stop");
+
 		  submitButton.addEventListener("click", (ev) => {
 		    ev.preventDefault();
 		    ev.stopPropagation();
@@ -64,7 +67,13 @@
 		    const voice = document.getElementById("voices").value;
 		    console.log('text : ', toRead);
 		    reader.readText(toRead, voice);
-		  })
+		  });
+
+		  stopButton.addEventListener("click", (ev) => {
+		    ev.preventDefault();
+		    ev.stopPropagation();
+		    reader.stop();
+		  });
 		});
 		</script>
 	</body>
