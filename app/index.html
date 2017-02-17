@@ -2,47 +2,71 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Electron boilerplate</title>
+		<title>Walrus Reader</title>
 		<link rel="stylesheet" href="index.css">
 		<script src="helpers/read.js"></script>
 	</head>
 	<body>
-		<div class="container">
-			<header>
-				<h1>Electron boilerplate</h1>
-			</header>
-			<section class="main"></section>
-			<form>
-			<textarea id="toRead" placeholder="Enter text to be read here"></textarea>
-			<button id="readSubmit" type="submit">"Submit"</button>
-			<button type="reset">"Clear"</button>
-			</form>
-			<footer></footer>
+	<h1>Walrus Reader</h1>
+				<div class="wpcf7" id="wpcf7-f156-p143-o1 formwrap">
+			    <form class="wpcf7-form" novalidate="novalidate">
+			        <p>
+			          </span>
+			          <span class="wpcf7-form-control-wrap Message">
+			            <textarea name="Message" id="toRead" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea" aria-invalid="false" placeholder="Enter text to be read aloud here"></textarea>
+			          </span>
+			          <span class="wpcf7-form-control-wrap Subject flat">
+			            <select name="Voice" id="voices" class="indent wpcf7-form-control wpcf7-select wpcf7-validates-as-required" aria-required="true" aria-invalid="false" placeholder="Select a voice">
+			              <option value="Alex">Alex</option>
+			              <option value="Albert">Albert</option>
+			              <option value="Bruce">Bruce</option>
+			              <option value="Fred">Fred</option>
+			              <option value="Junior">Junior</option>
+			              <option value="Ralph">Ralph</option>
+			              <option value="Agnes">Agnes</option>
+			              <option value="Kathy">Kathy</option>
+			              <option value="Princess">Princess</option>
+			              <option value="Vicki">Vicki</option>
+			              <option value="Victoria">Victoria</option>
+			              <option value="Bad News">Bad News</option>
+			              <option value="Bahh">Bahh</option>
+			              <option value="Bells">Bells</option>
+			              <option value="Boing">Boing</option>
+			              <option value="Bubbles">Bubbles</option>
+			              <option value="Cellos">Cellos</option>
+			              <option value="Deranged">Deranged</option>
+			              <option value="Good News">Good News</option>
+			              <option value="Hysterical">Hysterical</option>
+			              <option value="Pipe Organ">Pipe Organ</option>
+			              <option value="Trinoids">Trinoids</option>
+			              <option value="Whisper">Whisper</option>
+			              <option value="Zarvox">Zarvox</option>
+			            </select>
+			      	</p>
+			          <button type="submit" id="submit" value="Send" class="wpcf7-form-control wpcf7-submit btn">Read</button>
+				  </form>
+				</div>
+			<footer>
+			</footer>
 		</div>
 		<script>
 		require('electron').remote.getCurrentWindow().toggleDevTools({detached: true});
 		document.addEventListener("DOMContentLoaded", function (event) {
+			event.preventDefault();
+		  event.stopPropagation();
 		  const reader = require('./helpers/read');
 
-		  const submitButton = document.querySelector("#readSubmit");
+		  const submitButton = document.querySelector("#submit");
 		  submitButton.addEventListener("click", (ev) => {
 		    ev.preventDefault();
 		    ev.stopPropagation();
 		    const toRead = document.getElementById("toRead").value;
+		    const voice = document.getElementById("voices").value;
 		    console.log('text : ', toRead);
-		    reader.readText(toRead);
+		    reader.readText(toRead, voice);
 		  })
 		});
 		</script>
-
-		<script>
-	document.addEventListener("keydown", function (e) {
-		if (e.which === 123) {
-			require('remote').getCurrentWindow().toggleDevTools();
-		} else if (e.which === 116) {
-			location.reload();
-		}
-	});
-</script>
 	</body>
 </html>
+
